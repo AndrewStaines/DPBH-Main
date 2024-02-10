@@ -1,20 +1,30 @@
-// // popup.js
+// // // popup.js
 
-document.getElementById('submit').addEventListener('click', function (event) {
-  event.preventDefault();
-  var url = document.getElementById('url').value;
+
+chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
+  var currentTab = tabs[0];
+  var currentUrl = currentTab.url;
+
+  console.log(currentUrl);
+
   document.getElementById('result').innerHTML = '';
+  document.getElementById('gen').style.display = 'none';
+  document.getElementById('error').style.display = 'none';
+  document.getElementById('infoTable').style.display = 'none';
   document.getElementById('spinner').style.display = 'block';
-  console.log(url);
-  fetch('http://localhost:5000/scrape', {
+
+  console.log(currentUrl);
+  if(currentUrl.includes("amazon.in")){
+    fetch('http://localhost:5000/scrape', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ url }),
+    body: JSON.stringify({ currentUrl }),
   })
   .then(response => response.json())
   .then(data => {
+    console.log(data);
     document.getElementById('spinner').style.display = 'none';
     document.getElementById('infoTable').style.display = 'table';
     var title = document.getElementById('title');
@@ -30,312 +40,155 @@ document.getElementById('submit').addEventListener('click', function (event) {
       "_id": {
         "$oid": "656d6e1a404c285a74bfe020"
       },
-      "product": "        Crocs Unisex Adult Navy/Pepper LiteRide 360 Clog 206708-4CC-M9W11       ",
+      "product": "Crocs Unisex Adult Navy/Pepper LiteRide 360 Clog 206708-4CC-M9W11",
       "price": "6,000"
     },
     {
       "_id": {
         "$oid": "656d6ea7404c285a74bfe021"
       },
-      "product": "        Samsung Galaxy A54 5G (Awesome Violet, 8GB, 256GB Storage) | 50 MP No Shake Cam (OIS) | IP67 | Gorilla Glass 5 | Voice Focus | Without Charger       ",
+      "product": "Samsung Galaxy A54 5G (Awesome Violet, 8GB, 256GB Storage) | 50 MP No Shake Cam (OIS) | IP67 | Gorilla Glass 5 | Voice Focus | Without Charger",
       "price": "37,499"
     },
     {
       "_id": {
         "$oid": "656d6ea7404c285a74bfe022"
       },
-      "product": "        Fire-Boltt Ninja Call Pro Plus 1.83\" Smart Watch with Bluetooth Calling, AI Voice Assistance, 100 Sports Modes IP67 Rating, 240 * 280 Pixel High Resolution       ",
+      "product": "Fire-Boltt Ninja Call Pro Plus 1.83\" Smart Watch with Bluetooth Calling, AI Voice Assistance, 100 Sports Modes IP67 Rating, 240 * 280 Pixel High Resolution",
       "price": "1,999"
     },
     {
       "_id": {
         "$oid": "656d6ea7404c285a74bfe023"
       },
-      "product": "        AppIe Aírpoḍs Pro (2nd Generation) ​​​​​​​Apple Aírpoḍs Pro (2nd Generation) ​​​​​​​ Lightning Connector       ",
+      "product": "Apple AirPods Pro (2nd Generation) with MagSafe Case (USB‑C) ​​​​​​​",
       "price": "24,900"
     },
     {
       "_id": {
         "$oid": "656d6ea7404c285a74bfe024"
       },
-      "product": "        Samsung Galaxy A54 5G (Awesome Violet, 8GB, 128GB Storage) | 50 MP No Shake Cam (OIS) | IP67 | Gorilla Glass 5 | Voice Focus | Without Charger       ",
+      "product": "Samsung Galaxy A54 5G (Awesome Violet, 8GB, 128GB Storage) | 50 MP No Shake Cam (OIS) | IP67 | Gorilla Glass 5 | Voice Focus | Without Charger",
       "price": "35,499"
     },
     {
-      "Position": "1",
-      "product": "Galaxy Z Fold5 (Special Edition)",
-      "price": "₹ 164999.00",
-      "Varient": "Colour :\nClick to Collapse\nGray"
-    },
-    {
-      "Position": "2",
-      "product": "Galaxy Z Fold5",
-      "price": "₹ 154999.00",
-      "Varient": "Colour :\nClick to Collapse\nIcyblue"
-    },
-    {
       "Position": "3",
-      "product": "Galaxy S24 Ultra",
-      "price": "₹ 139999.00",
-      "Varient": "Colour :\nClick to Collapse\nTitanium Gray"
+      "product": "Samsung Galaxy M34 5G (Prism Silver,8GB,128GB)|120Hz sAMOLED Display|50MP Triple No Shake Cam|6000 mAh Battery|4 Gen OS Upgrade & 5 Year Security Update|16GB RAM with RAM+|Android 13|Without Charger",
+      "price": "₹17,999"
     },
     {
       "Position": "4",
-      "product": "Galaxy S24 Ultra (Special Edition)",
-      "price": "₹ 139999.00",
-      "Varient": "Colour :\nClick to Collapse\nTitanium Blue"
+      "product": "Samsung Galaxy M14 5G (Smoky Teal,6GB,128GB)|50MP Triple Cam|Segment's Only 6000 mAh 5G SP|5nm Processor|2 Gen. OS Upgrade & 4 Year Security Update|12GB RAM with RAM Plus|Android 13|Without Charger",
+      "price": "₹13,990"
     },
     {
       "Position": "5",
-      "product": "Galaxy S23 Ultra",
-      "price": "₹ 124999.00",
-      "Varient": "Colour :\nClick to Collapse\nGreen"
+      "product": "Samsung Galaxy M34 5G (Midnight Blue,6GB,128GB)|120Hz sAMOLED Display|50MP Triple No Shake Cam|6000 mAh Battery|4 Gen OS Upgrade & 5 Year Security Update|12GB RAM with RAM+|Android 13|Without Charger",
+      "price": "₹15,999"
     },
     {
       "Position": "6",
-      "product": "Galaxy S23 Ultra (Special Edition)",
-      "price": "₹ 124999.00",
-      "Varient": "Colour :\nClick to Collapse\nLime"
+      "product": "Samsung Galaxy M14 5G (Smoky Teal,4GB,128GB)|50MP Triple Cam|Segment's Only 6000 mAh 5G SP|5nm Processor|2 Gen. OS Upgrade & 4 Year Security Update|12GB RAM with RAM Plus|Android 13|Without Charger",
+      "price": "₹12,490"
     },
     {
       "Position": "7",
-      "product": "Galaxy S24+",
-      "price": "₹ 109999.00",
-      "Varient": "Colour :\nClick to Collapse\nCobalt Violet"
-    },
-    {
-      "Position": "8",
-      "product": "Galaxy S24+ (Special Edition)",
-      "price": "₹ 109999.00",
-      "Varient": "Colour :\nClick to Collapse\nSapphire Blue"
-    },
-    {
-      "Position": "9",
-      "product": "Galaxy Z Flip5",
-      "price": "₹ 99999.00",
-      "Varient": "Colour :\nClick to Collapse\nMint"
+      "product": "Samsung Galaxy M04 Light Green, 4GB RAM, 64GB Storage | Upto 8GB RAM with RAM Plus | MediaTek Helio P35 Octa-core Processor | 5000 mAh Battery | 13MP Dual Camera",
+      "price": "₹7,999"
     },
     {
       "Position": "10",
-      "product": "Galaxy Z Flip5 (Special Edition)",
-      "price": "₹ 99999.00",
-      "Varient": "Colour :\nClick to Collapse\nGray"
+      "product": "Samsung Galaxy A05 (Light Green, 6GB, 128GB Storage) | 50 MP Main Camera | Upto 12GB RAM with RAM Plus | MediaTek Helio G85 | 5000 mAh Battery",
+      "price": "₹12,499"
     },
     {
       "Position": "11",
-      "product": "Galaxy S24",
-      "price": "₹ 89999.00",
-      "Varient": "Colour :\nClick to Collapse\nAmber Yellow"
+      "product": "Samsung Galaxy A15 5G (Blue, 8GB, 128GB Storage) | 50 MP Main Camera | Android 14 with One UI 6.0 | 16GB Expandable RAM | MediaTek Dimensity 6100+ | 5000 mAh Battery",
+      "price": "₹19,499"
     },
     {
       "Position": "12",
-      "product": "Galaxy S24 (Special Edition)",
-      "price": "₹ 79999.00",
-      "Varient": "Colour :\nClick to Collapse\nSapphire Blue"
+      "product": "Samsung Galaxy F04 4GB 64GB Jade Purple",
+      "price": "₹7,999"
     },
     {
       "Position": "13",
-      "product": "Galaxy S23",
-      "price": "₹ 74999.00",
-      "Varient": "Colour :\nClick to Collapse\nPhantomblack"
+      "product": "Samsung Galaxy M34 5G (Waterfall Blue,8GB,128GB)|120Hz sAMOLED Display|50MP Triple No Shake Cam|6000 mAh Battery|4 Gen OS Upgrade & 5 Year Security Update|16GB RAM with RAM+|Android 13|Without Charger",
+      "price": "₹17,999"
     },
     {
       "Position": "14",
-      "product": "Galaxy S22",
-      "price": "₹ 62999.00",
-      "Varient": "Colour :\nClick to Collapse\nPhantom Black"
+      "product": "Samsung Galaxy A23 5G, Light Blue (8GB, 128GB Storage) with Offer",
+      "price": "₹24,999"
     },
     {
       "Position": "15",
-      "product": "Galaxy S23 FE (Special Edition)",
-      "price": "₹ 59999.00",
-      "Varient": "Colour :\nClick to Collapse\nBlue"
+      "product": "TECNO Spark 10C (Magic Skin Orange, 8GB RAM,128GB Storage)|16GB Expandable RAM | 90Hz Refresh Rate 6.6\" HD+Dot Display | 16MP AI Dual Rear Camera",
+      "price": "₹8,199"
     },
     {
       "Position": "16",
-      "product": "Galaxy S23 FE",
-      "price": "₹ 59999.00",
-      "Varient": "Colour :\nClick to Collapse\nMint"
+      "product": "Samsung Galaxy S24 5G AI Smartphone (Amber Yellow, 8GB, 512GB Storage)",
+      "price": "₹89,999"
     },
     {
       "Position": "17",
-      "product": "Galaxy S21 FE 5G",
-      "price": "₹ 39999.00",
-      "Varient": "Colour :\nClick to Collapse\nOlive"
+      "product": "Samsung Galaxy S21 FE 5G (2023) (8GB 256GB Olive) with Snapdragon 888",
+      "price": "₹39,999"
     },
     {
       "Position": "18",
-      "product": "Galaxy A54 5G (8GB Memory)",
-      "price": "₹ 37499.00",
-      "Varient": "Colour :\nClick to Collapse\nAwesome White"
+      "product": "Samsung Galaxy A34 5G (Awesome Violet, 8GB, 256GB Storage) | 48 MP No Shake Cam (OIS) | IP67 | Gorilla Glass 5 | Voice Focus | Travel Adapter to be Purchased Separately",
+      "price": "₹29,499"
     },
     {
       "Position": "19",
-      "product": "Galaxy A34 5G (8GB Memory)",
-      "price": "₹ 27499.00",
-      "Varient": "Colour :\nClick to Collapse\nLight Green"
+      "product": "Samsung Galaxy M04 Dark Blue, 4GB RAM, 64GB Storage | Upto 8GB RAM with RAM Plus | MediaTek Helio P35 Octa-core Processor | 5000 mAh Battery | 13MP Dual Camera",
+      "price": "₹7,999"
     },
     {
       "Position": "20",
-      "product": "Galaxy A25 5G (8GB Memory)",
-      "price": "₹ 26999.00",
-      "Varient": "Colour :\nClick to Collapse\nBlue"
+      "product": "Samsung Galaxy A25 5G (Blue, 8GB, 128GB Storage) | 50 MP Main Camera | Android 14 with One UI 6.0 | 16GB Expandable RAM | Exynos 1280 | 5000 mAh Battery",
+      "price": "₹26,999"
     },
     {
       "Position": "21",
-      "product": "Galaxy A34 5G (6GB Memory)",
-      "price": "₹ 25499.00",
-      "Varient": "Colour :\nClick to Collapse\nAwesome Violet"
+      "product": "Samsung Galaxy A34 5G (Awesome Graphite, 8GB, 128GB Storage) | 48 MP No Shake Cam (OIS) | IP67 | Gorilla Glass 5 | Voice Focus | Without Charger",
+      "price": "₹27,499"
     },
     {
       "Position": "22",
-      "product": "Galaxy F54 5G (8GB Memory)",
-      "price": "₹ 24999.00",
-      "Varient": "Colour :\nClick to Collapse\nStardust Silver"
+      "product": "Samsung Galaxy M34 5G (Prism Silver,6GB,128GB)|120Hz sAMOLED Display|50MP Triple No Shake Cam|6000 mAh Battery|4 Gen OS Upgrade & 5 Year Security Update|12GB RAM with RAM+|Android 13|Without Charger",
+      "price": "₹15,999"
     },
     {
       "Position": "23",
-      "product": "Galaxy A15 5G (8GB Memory)",
-      "price": "₹ 19499.00",
-      "Varient": "Colour :\nClick to Collapse\nLight Blue"
+      "product": "Samsung Galaxy A54 5G (Awesome Graphite, 8GB, 256GB Storage) | 50 MP No Shake Cam (OIS) | IP67 | Gorilla Glass 5 | Voice Focus | Without Charger",
+      "price": "₹37,499"
     },
     {
       "Position": "24",
-      "product": "Galaxy A14 5G (8GB Memory)",
-      "price": "₹ 18999.00",
-      "Varient": "Colour :\nClick to Collapse\nDark Red"
+      "product": "Samsung Galaxy M13 (Midnight Blue, 4GB, 64GB Storage) | 6000mAh Battery | Upto 8GB RAM with RAM Plus",
+      "price": "₹11,999"
     },
     {
       "Position": "25",
-      "product": "Galaxy F34 5G (8GB Memory)",
-      "price": "₹ 17999.00",
-      "Varient": "Colour :\nClick to Collapse\nElectric Black"
-    },
-    {
-      "Position": "26",
-      "product": "Galaxy M34 5G (8GB Memory)",
-      "price": "₹ 17999.00",
-      "Varient": "Colour :\nClick to Collapse\nWaterfall Blue"
+      "product": "Samsung Galaxy S24 Plus 5G AI Smartphone (Cobalt Violet, 12GB, 512GB Storage)",
+      "price": "₹1,09,999"
     },
     {
       "Position": "27",
-      "product": "Galaxy A14 5G (6GB Memory)",
-      "price": "₹ 16999.00",
-      "Varient": "Colour :\nClick to Collapse\nDark Red"
+      "product": "TECNO POP 8 (Mystery White,(8GB*+64GB)|90Hz Punch Hole Display with Dynamic Port & Dual Speakers with DTS| 5000mAh Battery |10W Type-C| Side Fingerprint Sensor| Octa-Core Processor",
+      "price": "₹6,499"
     },
-    {
-      "Position": "28",
-      "product": "Galaxy F34 5G (6GB Memory)",
-      "price": "₹ 15999.00",
-      "Varient": "Colour :\nClick to Collapse\nElectric Black"
-    },
-    {
-      "Position": "29",
-      "product": "Galaxy M34 5G (6GB Memory)",
-      "price": "₹ 15999.00",
-      "Varient": "Colour :\nClick to Collapse\nWaterfall Blue"
-    },
-    {
-      "Position": "30",
-      "product": "Galaxy A14 5G (4GB Memory)",
-      "price": "₹ 14499.00",
-      "Varient": "Colour :\nClick to Collapse\nDark Red"
-    },
-    {
-      "Position": "31",
-      "product": "Galaxy A05s (6GB Memory)",
-      "price": "₹ 12999.00",
-      "Varient": "Colour :\nClick to Collapse\nBlack"
-    },
-    {
-      "Position": "32",
-      "product": "Galaxy A14 (4GB Memory)",
-      "price": "₹ 12999.00",
-      "Varient": "Colour :\nClick to Collapse\nBlack"
-    },
-    {
-      "Position": "33",
-      "product": "Galaxy A04 (4GB Memory)",
-      "price": "₹ 12999.00",
-      "Varient": "Colour :\nClick to Collapse\nGreen"
-    },
-    {
-      "Position": "34",
-      "product": "Galaxy A05 (6GB Memory)",
-      "price": "₹ 12499.00",
-      "Varient": "Colour :\nClick to Collapse\nBlack"
-    },
-    {
-      "Position": "35",
-      "product": "Galaxy A04s (4GB Memory)",
-      "price": "₹ 11999.00",
-      "Varient": "Colour :\nClick to Collapse\nGreen"
-    },
-    {
-      "Position": "36",
-      "product": "Galaxy M14 5G (6GB Memory)",
-      "price": "₹ 11990.00",
-      "Varient": "Colour :\nClick to Collapse\nIcy Silver"
-    },
-    {
-      "Position": "37",
-      "product": "Galaxy A05s (4GB Memory)",
-      "price": "₹ 11499.00",
-      "Varient": "Colour :\nClick to Collapse\nBlack"
-    },
-    {
-      "Position": "38",
-      "product": "Galaxy F14 5G (6GB Memory)",
-      "price": "₹ 11490.00",
-      "Varient": "Colour :\nClick to Collapse\nO.M.G. Black"
-    },
-    {
-      "Position": "39",
-      "product": "Galaxy M14 5G (4GB Memory)",
-      "price": "₹ 10990.00",
-      "Varient": "Colour :\nClick to Collapse\nBerry Blue"
-    },
-    {
-      "Position": "40",
-      "product": "Galaxy F14 5G (4GB Memory)",
-      "price": "₹ 10490.00",
-      "Varient": "Colour :\nClick to Collapse\nO.M.G. Black"
-    },
-    {
-      "Position": "41",
-      "product": "Galaxy A05 (4GB Memory)",
-      "price": "₹ 9999.00",
-      "Varient": "Colour :\nClick to Collapse\nBlack"
-    },
-    {
-      "Position": "42",
-      "product": "Galaxy A04e (3GB Memory)",
-      "price": "₹ 9999.00",
-      "Varient": "Colour :\nClick to Collapse\nCopper"
-    },
-    {
-      "Position": "43",
-      "product": "Galaxy F13 (4GB Memory)",
-      "price": "₹ 7499.00",
-      "Varient": "Colour :\nClick to Collapse\nNightsky Green"
-    },
-    {
-      "Position": "44",
-      "product": "Galaxy F04 (4GB Memory)",
-      "price": "₹ 5999.00",
-      "Varient": "Colour :\nClick to Collapse\nOpal Green"
-    },
-    {
-      "Position": "45",
-      "product": "Galaxy M04 (4GB Memory)",
-      "price": "₹ 5999.00",
-      "Varient": "Colour :\nClick to Collapse\nSea Glass Green"
-    }
+
+
   ]
-    n = 5
+    n = 27
+    
     
     for (var i = 0; i < n; i++) {
-      if(launch[i]['product']==data['title']){
+      if(launch[i]['product']==data['title'].trim()){
         var launchPrice = parseInt(launch[i]['price'].replace(/,/g, ''), 10); 
           var dataPrice = parseInt(data['price'].replace(/,/g, ''), 10);
           var disc = parseInt(data['disc'].replace(/%/g, ''), 10);
@@ -376,23 +229,244 @@ document.getElementById('submit').addEventListener('click', function (event) {
   .catch(error => {
     document.getElementById('spinner').style.display = 'none';
     document.getElementById('infoTable').style.display = 'none';
+    document.getElementById('error').style.display = 'block';
     document.getElementById('result').innerHTML = "An Error Occured while fetching the data. Please try again.";
     console.error('Error:', error);
   });
-});
-// var d = '19,999';
-// var l = '24,900';
-// var launchPrice = parseInt(l.replace(/,/g, ''), 10); 
-// var dataPrice = parseInt(d.replace(/,/g, ''), 10);
+  }
+  else{
+    document.getElementById('gen').style.display = 'block';
+    document.getElementById('spinner').style.display = 'none';
+    document.getElementById('infoTable').style.display = 'none';
+    document.getElementById('result').innerHTML = "This extension only works on Amazon.in";
+  }
 
+
+});
+
+
+// document.getElementById('submit').addEventListener('click', function (event) {
+//   event.preventDefault();
+//   var url = document.getElementById('url').value;
+//   document.getElementById('result').innerHTML = '';
+//   document.getElementById('infoTable').style.display = 'none';
+//   document.getElementById('spinner').style.display = 'block';
+//   console.log(url);
+//   fetch('http://localhost:5000/scrape', {
+//     method: 'POST',
+//     headers: {
+//       'Content-Type': 'application/json',
+//     },
+//     body: JSON.stringify({ url }),
+//   })
+//   .then(response => response.json())
+//   .then(data => {
+//     document.getElementById('spinner').style.display = 'none';
+//     document.getElementById('infoTable').style.display = 'table';
+//     var title = document.getElementById('title');
+//     var price = document.getElementById('price');
+//     var mrp = document.getElementById('mrp');
+//     var lp = document.getElementById('lp');
+//     var dis = document.getElementById('dis');
+//     var adisc = document.getElementById('adisc');
+//     var rate = document.getElementById('rate');
+//     var res = document.getElementById('result');
+
+//     launch=[{
+//       "_id": {
+//         "$oid": "656d6e1a404c285a74bfe020"
+//       },
+//       "product": "Crocs Unisex Adult Navy/Pepper LiteRide 360 Clog 206708-4CC-M9W11",
+//       "price": "6,000"
+//     },
+//     {
+//       "_id": {
+//         "$oid": "656d6ea7404c285a74bfe021"
+//       },
+//       "product": "Samsung Galaxy A54 5G (Awesome Violet, 8GB, 256GB Storage) | 50 MP No Shake Cam (OIS) | IP67 | Gorilla Glass 5 | Voice Focus | Without Charger",
+//       "price": "37,499"
+//     },
+//     {
+//       "_id": {
+//         "$oid": "656d6ea7404c285a74bfe022"
+//       },
+//       "product": "Fire-Boltt Ninja Call Pro Plus 1.83\" Smart Watch with Bluetooth Calling, AI Voice Assistance, 100 Sports Modes IP67 Rating, 240 * 280 Pixel High Resolution",
+//       "price": "1,999"
+//     },
+//     {
+//       "_id": {
+//         "$oid": "656d6ea7404c285a74bfe023"
+//       },
+//       "product": "Apple AirPods Pro (2nd Generation) with MagSafe Case (USB‑C) ​​​​​​​",
+//       "price": "24,900"
+//     },
+//     {
+//       "_id": {
+//         "$oid": "656d6ea7404c285a74bfe024"
+//       },
+//       "product": "Samsung Galaxy A54 5G (Awesome Violet, 8GB, 128GB Storage) | 50 MP No Shake Cam (OIS) | IP67 | Gorilla Glass 5 | Voice Focus | Without Charger",
+//       "price": "35,499"
+//     },
+//     {
+//       "Position": "3",
+//       "product": "Samsung Galaxy M34 5G (Prism Silver,8GB,128GB)|120Hz sAMOLED Display|50MP Triple No Shake Cam|6000 mAh Battery|4 Gen OS Upgrade & 5 Year Security Update|16GB RAM with RAM+|Android 13|Without Charger",
+//       "price": "₹17,999"
+//     },
+//     {
+//       "Position": "4",
+//       "product": "Samsung Galaxy M14 5G (Smoky Teal,6GB,128GB)|50MP Triple Cam|Segment's Only 6000 mAh 5G SP|5nm Processor|2 Gen. OS Upgrade & 4 Year Security Update|12GB RAM with RAM Plus|Android 13|Without Charger",
+//       "price": "₹13,990"
+//     },
+//     {
+//       "Position": "5",
+//       "product": "Samsung Galaxy M34 5G (Midnight Blue,6GB,128GB)|120Hz sAMOLED Display|50MP Triple No Shake Cam|6000 mAh Battery|4 Gen OS Upgrade & 5 Year Security Update|12GB RAM with RAM+|Android 13|Without Charger",
+//       "price": "₹15,999"
+//     },
+//     {
+//       "Position": "6",
+//       "product": "Samsung Galaxy M14 5G (Smoky Teal,4GB,128GB)|50MP Triple Cam|Segment's Only 6000 mAh 5G SP|5nm Processor|2 Gen. OS Upgrade & 4 Year Security Update|12GB RAM with RAM Plus|Android 13|Without Charger",
+//       "price": "₹12,490"
+//     },
+//     {
+//       "Position": "7",
+//       "product": "Samsung Galaxy M04 Light Green, 4GB RAM, 64GB Storage | Upto 8GB RAM with RAM Plus | MediaTek Helio P35 Octa-core Processor | 5000 mAh Battery | 13MP Dual Camera",
+//       "price": "₹7,999"
+//     },
+//     {
+//       "Position": "10",
+//       "product": "Samsung Galaxy A05 (Light Green, 6GB, 128GB Storage) | 50 MP Main Camera | Upto 12GB RAM with RAM Plus | MediaTek Helio G85 | 5000 mAh Battery",
+//       "price": "₹12,499"
+//     },
+//     {
+//       "Position": "11",
+//       "product": "Samsung Galaxy A15 5G (Blue, 8GB, 128GB Storage) | 50 MP Main Camera | Android 14 with One UI 6.0 | 16GB Expandable RAM | MediaTek Dimensity 6100+ | 5000 mAh Battery",
+//       "price": "₹19,499"
+//     },
+//     {
+//       "Position": "12",
+//       "product": "Samsung Galaxy F04 4GB 64GB Jade Purple",
+//       "price": "₹7,999"
+//     },
+//     {
+//       "Position": "13",
+//       "product": "Samsung Galaxy M34 5G (Waterfall Blue,8GB,128GB)|120Hz sAMOLED Display|50MP Triple No Shake Cam|6000 mAh Battery|4 Gen OS Upgrade & 5 Year Security Update|16GB RAM with RAM+|Android 13|Without Charger",
+//       "price": "₹17,999"
+//     },
+//     {
+//       "Position": "14",
+//       "product": "Samsung Galaxy A23 5G, Light Blue (8GB, 128GB Storage) with Offer",
+//       "price": "₹24,999"
+//     },
+//     {
+//       "Position": "15",
+//       "product": "TECNO Spark 10C (Magic Skin Orange, 8GB RAM,128GB Storage)|16GB Expandable RAM | 90Hz Refresh Rate 6.6\" HD+Dot Display | 16MP AI Dual Rear Camera",
+//       "price": "₹8,199"
+//     },
+//     {
+//       "Position": "16",
+//       "product": "Samsung Galaxy S24 5G AI Smartphone (Amber Yellow, 8GB, 512GB Storage)",
+//       "price": "₹89,999"
+//     },
+//     {
+//       "Position": "17",
+//       "product": "Samsung Galaxy S21 FE 5G (2023) (8GB 256GB Olive) with Snapdragon 888",
+//       "price": "₹39,999"
+//     },
+//     {
+//       "Position": "18",
+//       "product": "Samsung Galaxy A34 5G (Awesome Violet, 8GB, 256GB Storage) | 48 MP No Shake Cam (OIS) | IP67 | Gorilla Glass 5 | Voice Focus | Travel Adapter to be Purchased Separately",
+//       "price": "₹29,499"
+//     },
+//     {
+//       "Position": "19",
+//       "product": "Samsung Galaxy M04 Dark Blue, 4GB RAM, 64GB Storage | Upto 8GB RAM with RAM Plus | MediaTek Helio P35 Octa-core Processor | 5000 mAh Battery | 13MP Dual Camera",
+//       "price": "₹7,999"
+//     },
+//     {
+//       "Position": "20",
+//       "product": "Samsung Galaxy A25 5G (Blue, 8GB, 128GB Storage) | 50 MP Main Camera | Android 14 with One UI 6.0 | 16GB Expandable RAM | Exynos 1280 | 5000 mAh Battery",
+//       "price": "₹26,999"
+//     },
+//     {
+//       "Position": "21",
+//       "product": "Samsung Galaxy A34 5G (Awesome Graphite, 8GB, 128GB Storage) | 48 MP No Shake Cam (OIS) | IP67 | Gorilla Glass 5 | Voice Focus | Without Charger",
+//       "price": "₹27,499"
+//     },
+//     {
+//       "Position": "22",
+//       "product": "Samsung Galaxy M34 5G (Prism Silver,6GB,128GB)|120Hz sAMOLED Display|50MP Triple No Shake Cam|6000 mAh Battery|4 Gen OS Upgrade & 5 Year Security Update|12GB RAM with RAM+|Android 13|Without Charger",
+//       "price": "₹15,999"
+//     },
+//     {
+//       "Position": "23",
+//       "product": "Samsung Galaxy A54 5G (Awesome Graphite, 8GB, 256GB Storage) | 50 MP No Shake Cam (OIS) | IP67 | Gorilla Glass 5 | Voice Focus | Without Charger",
+//       "price": "₹37,499"
+//     },
+//     {
+//       "Position": "24",
+//       "product": "Samsung Galaxy M13 (Midnight Blue, 4GB, 64GB Storage) | 6000mAh Battery | Upto 8GB RAM with RAM Plus",
+//       "price": "₹11,999"
+//     },
+//     {
+//       "Position": "25",
+//       "product": "Samsung Galaxy S24 Plus 5G AI Smartphone (Cobalt Violet, 12GB, 512GB Storage)",
+//       "price": "₹1,09,999"
+//     },
+//     {
+//       "Position": "27",
+//       "product": "TECNO POP 8 (Mystery White,(8GB*+64GB)|90Hz Punch Hole Display with Dynamic Port & Dual Speakers with DTS| 5000mAh Battery |10W Type-C| Side Fingerprint Sensor| Octa-Core Processor",
+//       "price": "₹6,499"
+//     },
+
+
+//   ]
+//     n = 5
+    
+    
+//     for (var i = 0; i < n; i++) {
+//       if(launch[i]['product']==data['title'].trim()){
+//         var launchPrice = parseInt(launch[i]['price'].replace(/,/g, ''), 10); 
+//           var dataPrice = parseInt(data['price'].replace(/,/g, ''), 10);
+//           var disc = parseInt(data['disc'].replace(/%/g, ''), 10);
+//           disc = disc*(-1);
 
 //           var acd = launchPrice - dataPrice;
 //           var acdp = (acd * 100) / launchPrice;
-//           console.log(acdp.toFixed(2));
-
-// disc = '-26%';
-// disc = parseInt(disc.replace(/%/g, ''), 10);
-// disc = disc*(-1);
-// console.log(disc-acdp<1);
-
+        
+//         if(launch[i]['price']>data['price'] &  disc-acdp<1){
+//           title.innerHTML =data['title'];
+//           price.innerHTML = data['price'];
+//           mrp.innerHTML = data['lprice'];
+//           lp.innerHTML = launch[i]['price'];
+//           dis.innerHTML = disc + '%';
+//           adisc.innerHTML = acdp.toFixed(2) + '%';
+//           rate.innerHTML = data['rev'];
+//           res.innerHTML = 'No Dark Pattern Detected';
+//           adisc.style.backgroundColor = 'green';
+//           res.style.color = 'green';
+//         }
+//         else{
+//           title.innerHTML =data['title'];
+//           price.innerHTML = data['price'];
+//           mrp.innerHTML = data['lprice'];
+//           lp.innerHTML = launch[i]['price'];
+//           dis.innerHTML = disc + '%';
+//           adisc.innerHTML = acdp.toFixed(2) + '%';
+//           rate.innerHTML = data['rev'];
+//           res.innerHTML = 'Dark Pattern Detected';
+//           adisc.style.backgroundColor = 'red';
+//           res.style.color = 'red';
+//         }
+        
+//       }
+//     }
+//     // res.innerHTML = 'Price: ' + data['price'] + '<br><br>' + 'MRP: ' + data['lprice'] + '<br><br>' + 'Ratings: '+ data['rev'] + '<br><br>' + 'Title: ' + data['title']; 
+//   })
+//   .catch(error => {
+//     document.getElementById('spinner').style.display = 'none';
+//     document.getElementById('infoTable').style.display = 'none';
+//     document.getElementById('result').innerHTML = "An Error Occured while fetching the data. Please try again.";
+//     console.error('Error:', error);
+//   });
+// });
 

@@ -3,7 +3,17 @@
   "name": "info Web",
   "version": "1.0.0",
   "permissions": [
-    "http://localhost:5000/"
+    "http://localhost:5000/",
+    "tabs"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["contentScript.js","python.js"]
+    }
   ],
   "description": "Fake Offers Detection",
   "action": {

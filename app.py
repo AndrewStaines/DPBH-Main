@@ -135,7 +135,7 @@ crawl_runner = CrawlerRunner()
 @app.route("/scrape", methods=['POST'])
 def scrape():
     data = request.json
-    baseURL = data.get('url')
+    baseURL = data.get('currentUrl')
     output_data.clear()
     scrape_with_crochet(baseURL=baseURL) # Passing that URL to our Scraping Function
 
